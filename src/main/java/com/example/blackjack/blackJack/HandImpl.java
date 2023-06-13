@@ -26,12 +26,17 @@ public class HandImpl implements Hand {
 
     @Override
     public boolean isBusted() {
+        if(getPoints()>21){
+            return true;
+        }else
         return false;
     }
 
     @Override
     public boolean isBlackJack() {
-        return false;
+        if(getPoints()==21|| listCards.size()==2){
+            return true;
+        }else return false;
     }
 
     @Override
