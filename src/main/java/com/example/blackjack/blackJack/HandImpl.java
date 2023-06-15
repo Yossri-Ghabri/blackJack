@@ -44,9 +44,24 @@ public class HandImpl implements Hand {
         if(firstCard==null || secondCard==null){
             return 0;
         }
-
         var sum = listCards.stream().map(e-> e.getPoints())
                 .mapToInt(Integer::intValue).sum();
+
+        var asCount = countAs();
+
+        if(sum > 21 && asCount > 0){
+
+            do {
+                sum -= 10;
+                asCount --;
+            }while (sum > 21 && asCount > 0);
+        }
         return sum;
+    }
+
+    private Long countAs(){
+        return listCards.stream()
+                .map(e->e.getValue())
+                .filter(e->e.equals("1") || e.equals("A")).count();
     }
 }
